@@ -10,7 +10,7 @@
     )
 
     func main() {
-        if err := filter.Load("/path/to/keywords"); err != nil {
+        if err := filter.Load("/path/to/keywords", ","); err != nil {
             panic(err)
         }
 
