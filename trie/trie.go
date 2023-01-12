@@ -45,31 +45,22 @@ func (t *Trie) Has(text string) bool {
 
 	keys := []rune(text)
 	node := t.Root
-	length := len(keys)
 	for i, key := range keys {
 		if !node.Exists(key) {
-			continue
-		}
-
-		node = node.Child(key)
-		for j := i + 1; j < length; j++ {
-			if !node.Exists(keys[j]) {
-				break
-			}
-			node = node.Child(keys[j])
-			if !node.End {
+			if i == 0 {
 				continue
 			}
 
-			if i <= j {
-				return true
-			}
-			i = j
 			node = t.Root
-			break
+			if !node.Exists(key) {
+				continue
+			}
 		}
 
-		node = t.Root
+		node = node.Child(key)
+		if node.End {
+			return true
+		}
 	}
 
 	return false
@@ -82,16 +73,17 @@ func (t *Trie) Replace(text string) string {
 
 	keys := []rune(text)
 	node := t.Root
-	var replaces []int = make([]int, 0)
 	length := len(keys)
-	for i, key := range keys {
-		if !node.Exists(key) {
+	replaces := make(map[int]bool)
+	for i := 0; i < length; i++ {
+		if !node.Exists(keys[i]) {
 			continue
 		}
 
-		node = node.Child(key)
+		node = node.Child(keys[i])
 		for j := i + 1; j < length; j++ {
 			if !node.Exists(keys[j]) {
+				i = j - 1
 				break
 			}
 
@@ -101,17 +93,14 @@ func (t *Trie) Replace(text string) string {
 			}
 
 			for r := i; r <= j; r++ {
-				replaces = append(replaces, r)
+				replaces[r] = true
 			}
-
-			i = j
-			node = t.Root
-			break
 		}
+
 		node = t.Root
 	}
 
-	for _, i := range replaces {
+	for i := range replaces {
 		c, _ := utf8.DecodeRuneInString("*")
 		keys[i] = c
 	}
