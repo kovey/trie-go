@@ -1,7 +1,6 @@
 package trie
 
 import (
-	"fmt"
 	"strings"
 	"unicode/utf8"
 )
@@ -18,10 +17,6 @@ func (t *Trie) Insert(text string) {
 	text = strings.ReplaceAll(text, " ", "")
 	if text == "" {
 		return
-	}
-
-	if text == "你好" {
-		fmt.Printf("text: %s", text)
 	}
 
 	keys := []rune(text)
@@ -106,10 +101,4 @@ func (t *Trie) Replace(text string) string {
 	}
 
 	return string(keys)
-}
-
-func (t *Trie) Print() {
-	for key := range t.Root.Children {
-		fmt.Print("key:", string(key))
-	}
 }

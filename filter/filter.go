@@ -1,7 +1,6 @@
 package filter
 
 import (
-	"fmt"
 	"io/ioutil"
 	"strings"
 
@@ -32,7 +31,6 @@ func Load(path, split string) error {
 }
 
 func Batch(words []string) {
-	fmt.Printf("batch[%d]", len(words))
 	for _, word := range words {
 		keywords.Insert(word)
 	}
