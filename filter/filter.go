@@ -1,7 +1,7 @@
 package filter
 
 import (
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/kovey/trie-go/trie"
@@ -20,7 +20,7 @@ func LoadByJson(path string) error {
 }
 
 func Load(path, split string) error {
-	content, err := ioutil.ReadFile(path)
+	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}

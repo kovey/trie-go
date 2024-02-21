@@ -20,16 +20,9 @@ func TestFilterJson(t *testing.T) {
 	if err := LoadByJson(CurrentDir() + "/keywords.json"); err != nil {
 		t.Fatalf("load error: %s", err)
 	}
-	t.Log(Replace("我是习近平毛泽东习近平"))
+	t.Log(Replace("我是成人视频啊啊啊"))
 	t.Log(Replace("你好啊"))
-	t.Logf("has[%t]", Has("共产党"))
-	t.Logf("has[%t]", Has("你好"))
-	t.Logf("has[%t]", Has("毛泽东"))
-	t.Logf("has[%t]", Has("习近平"))
-	t.Logf("has[%t]", Has("习近"))
-	t.Logf("has[%t]", Has("习"))
-	t.Logf("has[%t]", Has("习平"))
-	t.Logf("has[%t]", Has("近近"))
+	t.Logf("has[%t]", Has("成人视频"))
 }
 
 func CurrentDir() string {

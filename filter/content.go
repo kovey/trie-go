@@ -2,7 +2,7 @@ package filter
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -11,7 +11,7 @@ type Content struct {
 }
 
 func (c *Content) Load(path string) error {
-	content, err := ioutil.ReadFile(path)
+	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
